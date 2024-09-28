@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Apply animations at different speeds */
+.animate-float-astronaut {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-float-rocket {
+  animation: float 8s ease-in-out infinite;
+}
+
 /* Hide scrollbar but allow scrolling */
 html, body {
   scrollbar-width: none; /* Firefox */

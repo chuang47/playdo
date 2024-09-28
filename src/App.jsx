@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import playdoIcon from './icon.png';
+import astronautImg from './astronaut.png'; // Importing the astronaut image
+import rocketImg from './rocket.png'; // Importing the rocket image
+import { motion } from "framer-motion"; // Importing framer-motion for animations
 
 const App = () => {
   const [email, setEmail] = useState("");
@@ -8,7 +11,7 @@ const App = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch(
         "https://nameless-shore-65210-cc473cb7b162.herokuapp.com/api/waitlist",
@@ -34,8 +37,18 @@ const App = () => {
     }
   };
 
+  // Animation variants for text fade-in effect
+  const textVariant = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (delay) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, delay: delay },
+    }),
+  };
+
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full relative overflow-hidden">
       {/* Header Section */}
       <header className="fixed top-0 left-0 w-full bg-[#0a2540] bg-opacity-50 backdrop-blur-sm flex justify-between items-center py-4 px-12 z-50">
         {/* Left: Playdo Icon */}
@@ -47,22 +60,13 @@ const App = () => {
 
         {/* Center: Nav Links */}
         <div className="flex space-x-6 text-white text-sm justify-center w-full">
-          <a
-            href="#about"
-            className="px-3 py-1 hover:bg-[#1b3a57] rounded-lg transition-colors duration-300"
-          >
+          <a href="#about" className="px-3 py-1 hover:bg-[#1b3a57] rounded-lg transition-colors duration-300">
             01. ABOUT
           </a>
-          <a
-            href="#team"
-            className="px-3 py-1 hover:bg-[#1b3a57] rounded-lg transition-colors duration-300"
-          >
+          <a href="#team" className="px-3 py-1 hover:bg-[#1b3a57] rounded-lg transition-colors duration-300">
             02. TEAM
           </a>
-          <a
-            href="#faq"
-            className="px-3 py-1 hover:bg-[#1b3a57] rounded-lg transition-colors duration-300"
-          >
+          <a href="#faq" className="px-3 py-1 hover:bg-[#1b3a57] rounded-lg transition-colors duration-300">
             03. FAQ
           </a>
         </div>
@@ -74,20 +78,63 @@ const App = () => {
       {/* Main Top Section with Gradient */}
       <section className="relative min-h-screen bg-gradient-to-b from-[#0a2540] to-black flex flex-col items-center text-center text-white justify-start pt-24 overflow-hidden">
         
+        {/* Semi-Circle with Outer Glow Effect */}
+        <div className="absolute bottom-0 w-[2000px] h-[200px] bg-black rounded-t-[100%] overflow-hidden shadow-[0px_0px_100px_50px_rgba(255,255,255,0.6)]"></div>
+
+        {/* Floating Astronaut and Rocket */}
+        <img
+          src={astronautImg}
+          alt="Astronaut"
+          className="absolute left-[20%] top-[35%] h-24 transform animate-float-astronaut" // Adjusted the position
+        />
+        <img
+          src={rocketImg}
+          alt="Rocket"
+          className="absolute right-[20%] top-[35%] h-24 transform animate-float-rocket" // Adjusted the position
+        />
+
         <div className="bg-transparent border border-white rounded-full px-3 py-1 text-sm font-semibold border-[0.5px]">
             Est. 2024
         </div>
-        <h1 className="mt-4 text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-blue-700 text-5xl font-extrabold sm:text-6xl md:text-7xl">
-            AI-Powered <br /><span className="text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-blue-600">Technical Interview Prep.</span>
-        </h1>
-        <p className="mt-8 text-xl sm:text-2xl">
-            Get ready to elevate your technical interview game <br></br>with immersive, AI-driven practice.
-        </p>
 
-        {/* Email Form & Call to Action Button */}
+        {/* AI-Powered Technical Interview Prep Text Animation (Combined) */}
+        <motion.div
+          className="mt-4"
+          initial="hidden"
+          animate="visible"
+          variants={textVariant}
+          custom={0.3} // Delay 0.3s for the entire heading text
+        >
+          <h1 className="text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-blue-700 text-5xl font-extrabold sm:text-6xl md:text-7xl">
+            AI-Powered <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-blue-600">
+              Technical Interview Prep.
+            </span>
+          </h1>
+        </motion.div>
+
+        {/* Description Text Animation */}
+        <motion.p
+          className="mt-8 text-xl sm:text-2xl"
+          initial="hidden"
+          animate="visible"
+          variants={textVariant}
+          custom={0.6} // Delay 0.6s for description
+        >
+          Get ready to elevate your technical interview game <br />
+          with immersive, AI-driven practice.
+        </motion.p>
+
+        {/* Email Form & Call to Action Button Animation */}
         {!submitted ? (
-          <form onSubmit={handleSubmit} className="flex items-center mt-12 space-x-2">
-            {/* Updated Input Field */}
+          <motion.form
+            onSubmit={handleSubmit}
+            className="flex items-center mt-12 space-x-2"
+            initial="hidden"
+            animate="visible"
+            variants={textVariant}
+            custom={0.9} // Delay 0.9s for email form
+          >
             <input
               className="flex-grow p-4 bg-opacity-50 bg-[#0a2540] rounded-md text-gray-300 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out"
               type="email"
@@ -96,14 +143,13 @@ const App = () => {
               placeholder="Email address..."
               required
             />
-            {/* Updated Button */}
             <button
               className="bg-white text-black py-4 px-6 rounded-md font-semibold transition duration-300 ease-in-out hover:bg-gray-200"
               type="submit"
             >
-              Notify me
+              Join waitlist
             </button>
-          </form>
+          </motion.form>
         ) : (
           <div className="mt-8 text-center text-lg text-green-400">
             Thank you for joining the Playdo.ai waitlist! Please check your email (and your spam) to stay updated.
@@ -112,7 +158,6 @@ const App = () => {
 
         {/* Display error message if any */}
         {error && <p className="mt-4 text-lg text-red-500">{error}</p>}
-        
       </section>
 
       {/* About Section */}

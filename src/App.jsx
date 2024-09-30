@@ -108,32 +108,33 @@ const App = () => {
         </motion.p>
 
         {!submitted ? (
-          <motion.form
+            <motion.form
             onSubmit={handleSubmit}
-            className="flex flex-col md:flex-row items-center justify-center mt-4 md:mt-8 space-y-4 md:space-y-0 md:space-x-2 z-20 pt-12 md:pt-10"
+            className="flex flex-col md:flex-row items-center justify-center mt-4 md:mt-8 space-y-4 md:space-y-0 md:space-x-2 z-20 pt-16 md:pt-10" // Updated: Add sm:pt-16 for additional top padding on small screens
             initial="hidden"
             animate="visible"
             variants={textVariant}
             custom={0.9}
             style={{ maxWidth: '400px', margin: '0 auto' }}
-          >
+            >
             <input
-              className="w-auto p-2 md:p-3 bg-opacity-50 bg-[#0a2540] rounded-md text-gray-300 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email address..."
-              required
-              style={{ width: 'fit-content' }}
+                className="w-auto p-2 md:p-3 bg-opacity-50 bg-[#0a2540] rounded-md text-gray-300 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email address..."
+                required
+                style={{ width: 'fit-content' }}
             />
             <button
-              className="w-auto bg-white text-black py-2 md:py-3 px-4 md:px-6 rounded-md font-semibold transition duration-300 ease-in-out hover:bg-gray-200"
-              type="submit"
-              style={{ width: 'fit-content' }}
+                className="w-auto bg-white text-black py-2 md:py-3 px-4 md:px-6 rounded-md font-semibold transition duration-300 ease-in-out hover:bg-gray-200"
+                type="submit"
+                style={{ width: 'fit-content' }}
             >
-              Join waitlist
+                Join waitlist
             </button>
-          </motion.form>
+            </motion.form>
+        
         ) : (
           <div className="mt-8 text-center text-lg text-green-400 z-20">Thank you for joining the Playdo.ai waitlist! Please check your email (and your spam) to stay updated.</div>
         )}
@@ -157,7 +158,7 @@ const App = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="min-h-screen bg-black flex flex-col items-center justify-center text-white px-4">
+      <section id="team" className="min-h-screen bg-black flex flex-col items-center justify-center text-white px-4 pb-12">
         <h2 className="text-3xl font-bold mb-6">Meet Our Team!</h2>
         {/* Team Bio Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
@@ -184,7 +185,7 @@ const App = () => {
       </section>
 
       {/* Footer Section */}
-      <footer className="bg-[#0a2540] py-6 text-white">
+      <footer className="bg-[#0a2540] py-6 text-white pt-8">
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           {/* Left Side: Email and LinkedIn Icons */}
           <div className="flex space-x-4 items-center mb-4 md:mb-0">
